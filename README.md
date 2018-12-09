@@ -1,42 +1,80 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Project Name
+## CMS Project
 
-### Author: Student/Group Name
+### Author: Jen Carrigan
 
 ### Links and Resources
-* [repo](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com)
-* [front-end](http://xyz.com)
+* [repo](https://github.com/JenCarrigan/cms-frontend)
+* [website](http://carrigancms-carrigancms-v509wt7cw8io.s3-website-us-east-1.amazonaws.com/)
 
 ### Modules
-#### `modulename.js`
-##### Exported Values and Methods
+#### `index.js`
+Function Main provides store to class App
 
-###### `foo(thing) -> string`
-Usage Notes or examples
+#### `store/index.js`
+Combines reducers and creates and exports store
 
-###### `bar(array) -> array`
-Usage Notes or examples
+#### `api.js`
+Gets information from the database
 
-### Setup
-#### `.env` requirements
-* `PORT` - Port Number
-* `MONGODB_URI` - URL to the running mongo instance/db
+#### `app.js`
+Renders classes LoginContext, Login, Auth, and PickModel. PickModel will only be shown once Auth has been passed.
 
-#### Running the app
-* `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+#### `context.js`
+Class LoginProvider:
+setLoginState sets the login of user based on cookie load
+login saves the user's logged in cookie
+logout removes the cookie
 
-#### Tests
-* How do you run tests?
-* What assertions were made?
-* What assertions need to be / should be made?
+Renders context to children
+
+#### `login.js`
+Sets backend API URL
+
+Class Login:
+handleChange sets state of changed username
+handleSubmit posts signin to backend and returns token for storage
+logout logs user out
+googleURL uses oauth
+
+Render consumes LoginContext, shows login form or logout button depending on status
+
+#### `auth.js`
+Render consumes LoginContext and when wrapped around other elements, will show or hide based on user capabilities
+
+#### `picker.js`
+Class PickModel:
+handleModel sets the state based on button clicked
+conditionalRender returns all buttons or the class Records based on click
+
+Render returns conditionalRender
+
+#### `list.js`
+Sets API URL
+
+Class Records:
+deleteRecord deletes record from backend and store
+editRecord updates record from backend and store
+reset resets state
+componentDidMount gets information from backend
+
+Renders list of records depending on auth and class Record
+
+#### `record.js`
+Class Record:
+componentDidMount gets information from backend
+resetPlayer resets the form to blank
+handleSubmit posts or updates record information to the backend and store
+
+Renders record form if authorized
+
+#### `actions.js`
+Handles GET, POST, PUT, and DELETE routes
+
+#### `reducers.js`
+Handles GET, POST, PUT, and DELETE routes
 
 #### UML
-Link to an image of the UML for your application and response to events
+![UML](https://raw.githubusercontent.com/JenCarrigan/data-structures-and-algorithms/master/%3Aassets/CMS-UML.jpg)
